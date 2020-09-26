@@ -1,4 +1,4 @@
-# team-battle
+# Team Battle Conductor
 
 ## Project setup
 ```
