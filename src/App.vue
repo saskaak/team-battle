@@ -7,19 +7,19 @@
 </template>
 
 <script>
-  import TextArea from './components/TextArea';
+import TextArea from './components/TextArea';
 
-  export default {
-    components: {TextArea}
-  }
+export default {
+  components: {TextArea}
+}
 </script>
 
 <style lang="scss" scoped>
-  .app {
+.App {
 
-  }
+}
 
-  .app__title {
+.App__title {
 
-  }
+}
 </style>
