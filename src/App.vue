@@ -1,33 +1,29 @@
 <template>
-  <div class="App container">
-    <h1 class="App__title">Team Battle Conductor</h1>
-    <br>
-    <br>
-    <div
-      v-for="team in teams"
-      :key="team.color"
-    >
-      <TeamInput
-        v-model="team.characters"
-        :color="team.color"
+  <div class="App">
+    <h1 class="App__title container">Team Battle Conductor</h1>
+    <div class="App__view">
+      <ViewStart
+        v-if="view = 'start'"
+        v-model:teams="teams"
       />
-      <br>
-      <br>
     </div>
   </div>
 </template>
 
 <script>
-import TeamInput from '@/components/TeamInput';
+import ViewStart from '@/components/ViewStart';
 
 const teamDefaults = {
   characters: [],
 };
 
 export default {
-  components: {TeamInput},
+  components: {
+    ViewStart,
+  },
   data() {
     return {
+      view: 'start',
       teams: [
         {
           ...teamDefaults,
@@ -39,16 +35,19 @@ export default {
         }
       ]
     };
-  }
+  },
 }
 </script>
 
 <style lang="scss">
-.App {
+@import "~@/styles/definitions";
 
+.App {
 }
 
 .App__title {
-
+  height: r(72);
+  display: flex;
+  align-items: center;
 }
 </style>
