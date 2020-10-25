@@ -1,20 +1,49 @@
 <template>
-  <div class="app container">
-    <h1 class="app__title">Team Battle Conductor</h1>
-    <TextArea title="Player 1"/>
-    <TextArea title="Player 2"/>
+  <div class="App container">
+    <h1 class="App__title">Team Battle Conductor</h1>
+    <br>
+    <br>
+    <div
+      v-for="team in teams"
+      :key="team.color"
+    >
+      <TeamInput
+        v-model="team.characters"
+        :color="team.color"
+      />
+      <br>
+      <br>
+    </div>
   </div>
 </template>
 
 <script>
-import TextArea from './components/TextArea';
+import TeamInput from '@/components/TeamInput';
+
+const teamDefaults = {
+  characters: [],
+};
 
 export default {
-  components: {TextArea}
+  components: {TeamInput},
+  data() {
+    return {
+      teams: [
+        {
+          ...teamDefaults,
+          color: 'red',
+        },
+        {
+          ...teamDefaults,
+          color: 'blue',
+        }
+      ]
+    };
+  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .App {
 
 }
