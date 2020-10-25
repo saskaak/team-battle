@@ -9,6 +9,9 @@ html {
 }
 
 body {
+  font-family: $ff-grandstander;
+
+  // Normalize font rendering
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
