@@ -98,6 +98,7 @@ export default {
   color: inherit;
   background: none;
   resize: none;
+  white-space: nowrap;
 }
 
 </style>
