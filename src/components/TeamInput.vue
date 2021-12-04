@@ -8,6 +8,7 @@
       v-model="emitterModelValue"
       class="TeamInput__line-textarea"
       placeholder="Enter a character..."
+      min-rows="4"
       :attrsTextarea="{class: 'TeamInput__line-textarea-textarea', spellcheck: false}"
     />
   </label>

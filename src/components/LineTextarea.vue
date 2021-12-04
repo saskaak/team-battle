@@ -10,7 +10,7 @@
     <textarea
       v-bind="attrsTextarea"
       :value="string"
-      :rows="modelValue.length + 1"
+      :rows="Math.max(minRows, modelValue.length + 1)"
       class="LineTextarea__textarea"
       @input="onInput"
     />
@@ -20,6 +20,10 @@
 <script>
 export default {
   props: {
+    minRows: {
+      type: Number,
+      default: 1,
+    },
     modelValue: {
       type: Array,
       required: true,
