@@ -3,6 +3,9 @@
     class="ViewStart"
     :color-context="colorContext"
   >
+    <template v-slot:card-heading>
+      Enter two teams consisting of any number of characters.
+    </template>
     <div class="ViewStart__team-input-grid">
       <div
         v-for="team in emitterTeams"

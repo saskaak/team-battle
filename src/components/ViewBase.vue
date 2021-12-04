@@ -10,6 +10,12 @@
       <slot name="header"/>
     </div>
     <div class="ViewBase__card">
+      <div
+        v-if="$slots['card-heading']"
+        class="ViewBase__card-heading"
+      >
+        <slot name="card-heading"/>
+      </div>
       <slot/>
     </div>
   </div>
@@ -56,6 +62,11 @@ $breakpoint-grid: M;
   .ViewBase--color-context-yellow & {
     box-shadow: 0 r(8) r(24) rgba($color-yellow-dark, 0.5);
   }
+}
+
+.ViewBase__card-heading {
+  text-align: center;
+  margin-bottom: r(40);
 }
 
 </style>
