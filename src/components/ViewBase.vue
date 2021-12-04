@@ -72,6 +72,7 @@ $breakpoint-grid: M;
 .ViewBase__card-heading {
   text-align: center;
   margin-bottom: r(40);
+  line-height: r(24);
 }
 
 </style>
