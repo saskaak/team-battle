@@ -4,12 +4,11 @@
       <span class="App__logo-top">Team Battle</span>
       <span class="App__logo-bottom">Conductor</span>
     </h1>
-    <div class="App__view">
-      <ViewStart
-        v-if="view = 'start'"
-        v-model:teams="teams"
-      />
-    </div>
+    <ViewStart
+      v-if="view = 'start'"
+      color-context="yellow"
+      v-model:teams="teams"
+    />
   </div>
 </template>
 
@@ -46,10 +45,14 @@ export default {
 @import "~@/styles/definitions";
 
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: $header-height;
 }
 
 .App__logo {
-  height: r(72);
+  height: $header-height;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,4 +72,5 @@ export default {
   display: block;
   font-size: r(22);
 }
+
 </style>

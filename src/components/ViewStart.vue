@@ -1,5 +1,8 @@
 <template>
-  <div class="ViewStart container">
+  <ViewBase
+    class="ViewStart"
+    :color-context="colorContext"
+  >
     <div class="ViewStart__team-input-grid">
       <div
         v-for="team in emitterTeams"
@@ -12,18 +15,24 @@
         />
       </div>
     </div>
-  </div>
+  </ViewBase>
 </template>
 
 <script>
 import TeamInput from '@/components/TeamInput';
 import vModelEmitter from '@/lib/vModelEmitter';
+import ViewBase from '@/components/ViewBase';
 
 export default {
   components: {
+    ViewBase,
     TeamInput,
   },
   props: {
+    colorContext: {
+      type: String,
+      required: true,
+    },
     teams: {
       type: Array,
       required: true,
