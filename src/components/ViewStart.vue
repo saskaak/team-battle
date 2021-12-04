@@ -6,11 +6,11 @@
     <template v-slot:card-heading>
       Enter two teams consisting of any number of characters.
     </template>
-    <div class="ViewStart__team-input-grid">
+    <div class="team-grid">
       <div
         v-for="team in emitterTeams"
         :key="team.color"
-        class="ViewStart__team-input-column"
+        class="team-grid__column"
       >
         <TeamInput
           v-model="team.characters"
@@ -60,26 +60,6 @@ export default {
 $breakpoint-grid: M;
 
 .ViewStart {
-
-}
-
-.ViewStart__team-input-grid {
-  @include breakpoint($breakpoint-grid) {
-    display: flex;
-  }
-}
-
-.ViewStart__team-input-column {
-  flex-grow: 1;
-
-  &:first-child {
-    margin-bottom: r(32);
-
-    @include breakpoint($breakpoint-grid) {
-      margin-bottom: 0;
-      margin-right: r(32);
-    }
-  }
 }
 
 .ViewStart__cta {

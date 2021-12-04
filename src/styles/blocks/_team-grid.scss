@@ -1,0 +1,20 @@
+$team-grid__breakpoint: M;
+
+.team-grid {
+  @include breakpoint($team-grid__breakpoint) {
+    display: flex;
+  }
+}
+
+.team-grid__column {
+  flex-grow: 1;
+
+  &:first-child {
+    margin-bottom: r(32);
+
+    @include breakpoint($team-grid__breakpoint) {
+      margin-bottom: 0;
+      margin-right: r(32);
+    }
+  }
+}
