@@ -49,9 +49,14 @@ $breakpoint-grid: M;
 }
 
 .ViewBase__card {
-  padding: r(40);
+  padding: r(40) r(16);
   border-radius: r(24);
   background-color: $color-white;
+
+  @include breakpoint(S) {
+    padding-left: r(40);
+    padding-right: r(40);
+  }
 
   .ViewBase--color-context-red & {
     box-shadow: 0 r(8) r(24) rgba($color-red-dark, 0.5);
