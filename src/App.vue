@@ -85,7 +85,7 @@ export default {
 }
 
 .App__view {
-  transition: $duration-snappy;
+  transition: transform $duration-snappy, opacity $duration-snappy;
 
   &--enter-from {
     transform: scale(0.9) translateX(r(128));
