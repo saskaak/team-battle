@@ -4,11 +4,22 @@
       <span class="App__logo-top">Team Battle</span>
       <span class="App__logo-bottom">Conductor</span>
     </h1>
-    <ViewStart
-      v-if="view = 'start'"
-      color-context="yellow"
-      v-model:teams="teams"
-    />
+    <transition name="App__view-" mode="out-in">
+      <ViewStart
+        v-if="view === 'start'"
+        color-context="yellow"
+        v-model:teams="teams"
+        @start="() => view = 'game'"
+        class="App__view"
+      />
+      <ViewStart
+        v-else-if="view === 'game'"
+        color-context="yellow"
+        v-model:teams="teams"
+        @start="() => view = 'start'"
+        class="App__view"
+      />
+    </transition>
   </div>
 </template>
 
@@ -71,6 +82,28 @@ export default {
 .App__logo-bottom {
   display: block;
   font-size: r(22);
+}
+
+.App__view {
+  transition: $duration-snappy;
+
+  &--enter-from {
+    transform: scale(0.9) translateX(r(128));
+    opacity: 0;
+  }
+
+  &--enter-active {
+    transition-timing-function: ease-out;
+  }
+
+  &--leave-to {
+    transform: scale(0.9) translateX(r(-128));
+    opacity: 0;
+  }
+
+  &--leave-active {
+    transition-timing-function: ease-in;
+  }
 }
 
 </style>

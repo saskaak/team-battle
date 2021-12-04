@@ -18,6 +18,11 @@
         />
       </div>
     </div>
+    <div class="ViewStart__cta">
+      <ButtonRegular @click="$emit('start')">
+        Start!
+      </ButtonRegular>
+    </div>
   </ViewBase>
 </template>
 
@@ -25,9 +30,11 @@
 import TeamInput from '@/components/TeamInput';
 import vModelEmitter from '@/lib/vModelEmitter';
 import ViewBase from '@/components/ViewBase';
+import ButtonRegular from '@/components/ButtonRegular';
 
 export default {
   components: {
+    ButtonRegular,
     ViewBase,
     TeamInput,
   },
@@ -73,5 +80,11 @@ $breakpoint-grid: M;
       margin-right: r(32);
     }
   }
+}
+
+.ViewStart__cta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: r(56);
 }
 </style>
