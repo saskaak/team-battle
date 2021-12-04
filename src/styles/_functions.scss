@@ -2,3 +2,7 @@
 @function r($value) {
   @return ($value / 16) * 1rem;
 }
+
+@function gradient-corner($color-primary, $color-highlight) {
+  @return radial-gradient(farthest-corner at 100% 0%, $color-highlight 0, $color-primary 100%);
+}

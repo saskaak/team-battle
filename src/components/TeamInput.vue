@@ -82,11 +82,11 @@ export default {
   }
 
   .TeamInput--red & {
-    background-color: $color-red;
+    background: $gradient-corner-red;
   }
 
   .TeamInput--blue & {
-    background-color: $color-blue;
+    background: $gradient-corner-blue;
   }
 }
 

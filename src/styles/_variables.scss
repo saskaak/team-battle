@@ -1,7 +1,18 @@
 $color-white: #FFFFFF;
 $color-black: #000000;
+$color-red-light: #FF8E6C;
 $color-red: #E6655A;
+$color-red-dark: #B92121;
+$color-blue-light: #2CB8F5;
 $color-blue: #2995D8;
+$color-blue-dark: #1470B4;
+$color-yellow-light: #FFD76A;
+$color-yellow: #FFB155;
+$color-yellow-dark: #DD7700;
+
+$gradient-corner-red: gradient-corner($color-red, $color-red-light);
+$gradient-corner-blue: gradient-corner($color-blue, $color-blue-light);
+$gradient-corner-yellow: gradient-corner($color-yellow, $color-yellow-light);
 
 $duration-snappy: 0.2s;
 $duration-calm: 0.5s;
