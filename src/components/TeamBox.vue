@@ -44,7 +44,7 @@ export default {
   margin-left: r(-16);
   transform: translateX(-50%) rotate(270deg);
   font-size: r(12);
-  letter-spacing: r(2);
+  font-weight: bold;
   text-transform: uppercase;
 
   .TeamBox--red & {
