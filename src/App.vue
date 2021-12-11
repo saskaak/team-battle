@@ -18,8 +18,13 @@
         v-else-if="view === 'game'"
         color-context="yellow"
         :game="gameProp"
-        @start="() => view = 'start'"
+        @crown="endGame"
         class="App__view"
+      />
+      <ViewScore
+        v-else-if="view === 'score'"
+        color-context="yellow"
+        :score="scoreProp"
       />
     </transition>
   </div>
@@ -28,6 +33,7 @@
 <script>
 import ViewStart from '@/components/ViewStart';
 import ViewGame from '@/components/ViewGame';
+import ViewScore from '@/components/ViewScore';
 
 const teamDefaults = {
   characters: [],
@@ -35,6 +41,7 @@ const teamDefaults = {
 
 export default {
   components: {
+    ViewScore,
     ViewGame,
     ViewStart,
   },
@@ -75,6 +82,15 @@ export default {
           .reduce((sum, accumulator) => sum + accumulator, 0),
       }
     },
+    scoreProp() {
+      return this.teams.map((team, indexTeam) => ({
+        color: team.color,
+        characters: team.characters.map((name, indexCharacter) => ({
+          name,
+          ...this.battle[indexTeam][indexCharacter],
+        }))
+      }));
+    },
   },
   methods: {
     startBattle() {
@@ -87,6 +103,14 @@ export default {
     startGame() {
       this.game = this.availableCharacters.map((characters) => Math.floor(Math.random() * characters.length));
       this.view = 'game';
+    },
+    endGame(teamIndexWinner) {
+      this.battle.forEach((team, teamIndex) => this.battle[teamIndex][this.game[teamIndex]].available = false);
+
+      // TODO: Check if there are available characters for each team AND check if the game is over.
+
+      this.battle[teamIndexWinner][this.game[teamIndexWinner]].crown = true;
+      this.view = 'score';
     },
   }
 }
