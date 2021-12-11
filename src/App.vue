@@ -25,6 +25,7 @@
         v-else-if="view === 'score'"
         color-context="yellow"
         :score="scoreProp"
+        class="App__view"
       />
     </transition>
   </div>
