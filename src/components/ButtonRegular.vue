@@ -23,6 +23,14 @@
   text-shadow: 0 r(2) r(4) $color-yellow-dark;
   box-shadow: 0 r(8) r(24) rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition-property: opacity, box-shadow;
+  transition-duration: $duration-snappy;
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+    cursor: default;
+  }
 }
 
 </style>
