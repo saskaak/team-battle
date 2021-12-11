@@ -60,15 +60,20 @@ export default {
       return this.battle.map((team) => team.filter(({available}) => available).map((character, index) => index));
     },
     gameProp() {
-      return this.game.map((indexCharacter, indexTeam) => {
-        const characters = this.availableCharacters[indexTeam].map((index) => this.teams[indexTeam].characters[index]);
-        const [character] = characters.splice(indexCharacter, 1);
-        return {
-          otherCharacters: characters,
-          character,
-          color: this.teams[indexTeam].color,
-        };
-      });
+      return {
+        teams: this.game.map((indexCharacter, indexTeam) => {
+          const characters = this.availableCharacters[indexTeam].map((index) => this.teams[indexTeam].characters[index]);
+          const [character] = characters.splice(indexCharacter, 1);
+          return {
+            otherCharacters: characters,
+            character,
+            color: this.teams[indexTeam].color,
+          };
+        }),
+        number: 1 + this.battle
+          .map((team) => team.filter(({available}) => !available).length)
+          .reduce((sum, accumulator) => sum + accumulator, 0),
+      }
     },
   },
   methods: {
