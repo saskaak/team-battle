@@ -149,7 +149,7 @@ export default {
   justify-content: flex-end;
   margin-top: r(-20);
   transition-property: visibility, opacity, transform;
-  transition-duration: $duration-calm;
+  transition-duration: $duration-snappy;
 
   .ViewGame--spinning & {
     visibility: hidden;
