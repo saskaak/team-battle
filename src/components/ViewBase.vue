@@ -94,7 +94,11 @@ export default {
 .ViewBase__footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: r(56);
+  margin-top: r(40);
+
+  @include breakpoint($ViewBase-breakpoint) {
+    margin-top: r(56);
+  }
 }
 
 </style>
