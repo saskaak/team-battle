@@ -7,14 +7,19 @@ $team-grid__breakpoint: M;
 }
 
 .team-grid__column {
-  flex-grow: 1;
+  flex: 1 0 50%;
+
+  @include breakpoint($team-grid__breakpoint) {
+    padding-left: r(16);
+  }
 
   &:first-child {
     margin-bottom: r(32);
 
     @include breakpoint($team-grid__breakpoint) {
       margin-bottom: 0;
-      margin-right: r(32);
+      padding-left: 0;
+      padding-right: r(16);
     }
   }
 }
