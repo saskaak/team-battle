@@ -1,9 +1,11 @@
 <template>
   <div class="App">
-    <h1 class="App__logo container">
-      <span class="App__logo-top">Team Battle</span>
-      <span class="App__logo-bottom">Conductor</span>
-    </h1>
+    <div class="container">
+      <h1 class="App__logo">
+        <span class="App__logo-top">Team Battle</span>
+        <span class="App__logo-bottom">Conductor</span>
+      </h1>
+    </div>
     <transition name="App__view-" mode="out-in">
       <ViewStart
         v-if="view === 'start'"
@@ -92,15 +94,19 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-bottom: $header-height;
+
+  @include breakpoint($ViewBase-breakpoint) {
+    padding-bottom: $header-height;
+  }
 }
 
 .App__logo {
-  height: $header-height;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: $header-height;
+  padding-bottom: r(24);
   text-transform: uppercase;
   font-weight: bold;
   color: $color-white;
@@ -118,7 +124,13 @@ export default {
 }
 
 .App__view {
-  transition: transform $duration-snappy, opacity $duration-snappy;
+  transform-origin: bottom;
+  transition-property: transform, opacity;
+  transition-duration: $duration-snappy;
+
+  @include breakpoint($ViewBase-breakpoint) {
+    transform-origin: center;
+  }
 
   &--enter-from {
     transform: scale(0.9) translateX(r(128));

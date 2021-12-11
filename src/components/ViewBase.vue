@@ -41,21 +41,31 @@ $breakpoint-grid: M;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+
+  @include breakpoint($ViewBase-breakpoint) {
+    justify-content: center;
+    padding-bottom: $header-height;
+  }
 }
 
-.ViewStart__header {
-  padding: r(24) 0;
+.ViewBase__header {
+  margin-bottom: r(24);
 }
 
 .ViewBase__card {
   padding: r(40) r(16);
-  border-radius: r(24);
   background-color: $color-white;
+  border-top-left-radius: r(24);
+  border-top-right-radius: r(24);
 
   @include breakpoint(S) {
     padding-left: r(40);
     padding-right: r(40);
+  }
+
+  @include breakpoint($ViewBase-breakpoint) {
+    border-radius: r(24);
   }
 
   .ViewBase--color-context-red & {

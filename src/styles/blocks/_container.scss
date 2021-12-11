@@ -1,7 +1,7 @@
 .container {
   margin: 0 auto;
   width: 100%;
-  max-width: r(320);
+  max-width: r(400);
   padding: 0 r(16);
 
   @include breakpoint(S) {
