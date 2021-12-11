@@ -57,6 +57,7 @@ export default {
 }
 
 .TeamBox__main {
+  overflow: hidden;
   flex-grow: 1;
   padding: r(32);
   border-radius: r(24);
