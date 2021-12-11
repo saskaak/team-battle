@@ -49,8 +49,6 @@ export default {
   },
   methods: {
     async onInput(event) {
-      console.log('onInput');
-
       const el = event.target;
       const {value} = el;
       if (!value) {
