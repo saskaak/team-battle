@@ -18,14 +18,15 @@
         />
       </div>
     </div>
-    <div class="ViewStart__cta">
+
+    <template v-slot:footer>
       <ButtonRegular
         @click="$emit('start')"
         :disabled="!teamsValid"
       >
         Start!
       </ButtonRegular>
-    </div>
+    </template>
   </ViewBase>
 </template>
 
@@ -60,18 +61,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-@import "~@/styles/definitions";
-
-$breakpoint-grid: M;
-
-.ViewStart {
-}
-
-.ViewStart__cta {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: r(56);
-}
-</style>

@@ -17,6 +17,12 @@
         <slot name="card-heading"/>
       </div>
       <slot/>
+      <div
+        v-if="$slots['footer']"
+        class="ViewBase__footer"
+      >
+        <slot name="footer"/>
+      </div>
     </div>
   </div>
 </template>
@@ -34,8 +40,6 @@ export default {
 
 <style lang="scss">
 @import "~@/styles/definitions";
-
-$breakpoint-grid: M;
 
 .ViewBase {
   flex-grow: 1;
@@ -83,6 +87,12 @@ $breakpoint-grid: M;
   text-align: center;
   margin-bottom: r(40);
   line-height: r(24);
+}
+
+.ViewBase__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: r(56);
 }
 
 </style>
