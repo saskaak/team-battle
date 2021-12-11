@@ -9,13 +9,13 @@
         v-if="view === 'start'"
         color-context="yellow"
         v-model:teams="teams"
-        @start="() => view = 'game'"
+        @start="startBattle"
         class="App__view"
       />
-      <ViewStart
+      <ViewGame
         v-else-if="view === 'game'"
         color-context="yellow"
-        v-model:teams="teams"
+        :game="gameProp"
         @start="() => view = 'start'"
         class="App__view"
       />
@@ -25,6 +25,7 @@
 
 <script>
 import ViewStart from '@/components/ViewStart';
+import ViewGame from '@/components/ViewGame';
 
 const teamDefaults = {
   characters: [],
@@ -32,6 +33,7 @@ const teamDefaults = {
 
 export default {
   components: {
+    ViewGame,
     ViewStart,
   },
   data() {
@@ -46,9 +48,40 @@ export default {
           ...teamDefaults,
           color: 'blue',
         }
-      ]
+      ],
+      battle: [],
+      game: [],
     };
   },
+  computed: {
+    availableCharacters() {
+      return this.battle.map((team) => team.filter(({available}) => available).map((character, index) => index));
+    },
+    gameProp() {
+      return this.game.map((indexCharacter, indexTeam) => {
+        const characters = this.availableCharacters[indexTeam].map((index) => this.teams[indexTeam].characters[index]);
+        const [character] = characters.splice(indexCharacter, 1);
+        return {
+          otherCharacters: characters,
+          character,
+          color: this.teams[indexTeam].color,
+        };
+      });
+    },
+  },
+  methods: {
+    startBattle() {
+      this.battle = this.teams.map((team) => team.characters.map(() => ({
+        available: true,
+        crown: false,
+      })));
+      this.startGame();
+    },
+    startGame() {
+      this.game = this.availableCharacters.map((characters) => Math.floor(Math.random() * characters.length));
+      this.view = 'game';
+    },
+  }
 }
 </script>
 
