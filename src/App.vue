@@ -65,16 +65,20 @@ export default {
   },
   computed: {
     availableCharacters() {
-      return this.battle.map((team) => team.filter(({available}) => available).map((character, index) => index));
+      return this.battle.map((team) => team
+        .map((character, index) => ({character, index}))
+        .filter(({character}) => character.available)
+        .map(({index}) => index));
     },
     gameProp() {
       return {
         teams: this.game.map((indexCharacter, indexTeam) => {
-          const characters = this.availableCharacters[indexTeam].map((index) => this.teams[indexTeam].characters[index]);
-          const [character] = characters.splice(indexCharacter, 1);
+          const getCharacter = (index) => this.teams[indexTeam].characters[index];
           return {
-            otherCharacters: characters,
-            character,
+            otherCharacters: this.availableCharacters[indexTeam]
+              .filter((index) => index !== indexCharacter)
+              .map(getCharacter),
+            character: getCharacter(indexCharacter),
             color: this.teams[indexTeam].color,
           };
         }),
@@ -102,7 +106,8 @@ export default {
       this.startGame();
     },
     startGame() {
-      this.game = this.availableCharacters.map((characters) => Math.floor(Math.random() * characters.length));
+      this.game = this.availableCharacters
+        .map((characters) => characters[Math.floor(Math.random() * characters.length)]);
       this.view = 'game';
     },
     endGame(teamIndexWinner) {
