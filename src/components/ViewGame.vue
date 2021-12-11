@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      spinning: true,
+      spinning: this.game.teams.some(({otherCharacters}) => otherCharacters.length > 0),
     };
   },
 }
