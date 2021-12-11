@@ -19,7 +19,10 @@
       </div>
     </div>
     <div class="ViewStart__cta">
-      <ButtonRegular @click="$emit('start')">
+      <ButtonRegular
+        @click="$emit('start')"
+        :disabled="!teamsValid"
+      >
         Start!
       </ButtonRegular>
     </div>
@@ -50,6 +53,10 @@ export default {
   },
   computed: {
     emitterTeams: vModelEmitter('teams'),
+    teamsValid() {
+      const charactersByTeam = this.teams.map(({characters}) => characters);
+      return charactersByTeam.every(({length}) => length > 0) && charactersByTeam.some(({length}) => length > 1);
+    },
   },
 }
 </script>
