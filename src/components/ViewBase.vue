@@ -75,9 +75,11 @@ export default {
   .ViewBase--color-context-red & {
     box-shadow: 0 r(8) r(24) rgba($color-red-dark, 0.5);
   }
+
   .ViewBase--color-context-blue & {
     box-shadow: 0 r(8) r(24) rgba($color-blue-dark, 0.5);
   }
+
   .ViewBase--color-context-yellow & {
     box-shadow: 0 r(8) r(24) rgba($color-yellow-dark, 0.5);
   }
