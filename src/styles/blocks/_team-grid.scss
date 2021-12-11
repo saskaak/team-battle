@@ -1,7 +1,7 @@
-$team-grid__breakpoint: M;
+$_team-grid__breakpoint: M;
 
 .team-grid {
-  @include breakpoint($team-grid__breakpoint) {
+  @include breakpoint($_team-grid__breakpoint) {
     display: flex;
   }
 }
@@ -9,14 +9,14 @@ $team-grid__breakpoint: M;
 .team-grid__column {
   flex: 1 0 50%;
 
-  @include breakpoint($team-grid__breakpoint) {
+  @include breakpoint($_team-grid__breakpoint) {
     padding-left: r(16);
   }
 
   &:first-child {
     margin-bottom: r(32);
 
-    @include breakpoint($team-grid__breakpoint) {
+    @include breakpoint($_team-grid__breakpoint) {
       margin-bottom: 0;
       padding-left: 0;
       padding-right: r(16);
