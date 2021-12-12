@@ -58,17 +58,20 @@ export default {
 }
 
 .ViewBase__card {
-  padding: r(24) r(16);
+  padding: r(24) r(16) r(48);
   background-color: $color-white;
   border-top-left-radius: r(24);
   border-top-right-radius: r(24);
 
   @include breakpoint(S) {
-    padding: r(40);
+    padding-top: r(40);
+    padding-left: r(40);
+    padding-right: r(40);
   }
 
   @include breakpoint($ViewBase-breakpoint) {
     border-radius: r(24);
+    padding-bottom: r(40);
   }
 
   .ViewBase--color-context-red & {
