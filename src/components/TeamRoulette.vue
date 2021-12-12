@@ -79,7 +79,7 @@ export default {
 .TeamRoulette__sheet {
   position: absolute;
   transform: translateY(-90%);
-  animation: TeamRoulette__spin 2s ease-out both;
+  animation: TeamRoulette__spin 1s ease-out both;
 }
 
 .TeamRoulette__sheet-character {
