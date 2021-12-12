@@ -58,14 +58,13 @@ export default {
 }
 
 .ViewBase__card {
-  padding: r(40) r(16);
+  padding: r(24) r(16);
   background-color: $color-white;
   border-top-left-radius: r(24);
   border-top-right-radius: r(24);
 
   @include breakpoint(S) {
-    padding-left: r(40);
-    padding-right: r(40);
+    padding: r(40);
   }
 
   @include breakpoint($ViewBase-breakpoint) {
@@ -87,14 +86,18 @@ export default {
 
 .ViewBase__card-heading {
   text-align: center;
-  margin-bottom: r(40);
+  margin-bottom: r(24);
   line-height: r(24);
+
+  @include breakpoint(S) {
+    margin-bottom: r(40);
+  }
 }
 
 .ViewBase__footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: r(40);
+  margin-top: r(32);
 
   @include breakpoint($ViewBase-breakpoint) {
     margin-top: r(56);

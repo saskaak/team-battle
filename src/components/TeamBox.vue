@@ -59,13 +59,17 @@ export default {
 .TeamBox__main {
   overflow: hidden;
   flex-grow: 1;
-  padding: r(32);
+  padding: r(24);
   border-radius: r(24);
   font-family: $ff-grandstander;
   font-weight: bold;
   font-size: r(20);
   line-height: r(32);
   color: $color-white;
+
+  @include breakpoint(S) {
+    padding: r(32);
+  }
 
   .TeamBox--red & {
     background: $gradient-corner-red;
