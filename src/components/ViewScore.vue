@@ -146,6 +146,7 @@ export default {
 }
 
 .ViewScore__header-text {
+  padding-top: 0.2em; // Center uppercase text.
   font-size: r(64);
   font-weight: bold;
   color: $color-white;
