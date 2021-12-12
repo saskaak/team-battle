@@ -25,13 +25,13 @@
     </template>
     <div class="team-grid">
       <div
-        v-for="team in score.teams"
+        v-for="(team, index) in score.teams"
         :key="team.color"
         class="team-grid__column"
       >
         <TeamBox :color="team.color">
           <div
-            v-for="character in team.characters"
+            v-for="character in charactersSorted[index]"
             :key="character.name"
             class="ViewScore__character"
             :class="{'ViewScore__character--unavailable': !character.available && !isEnd}"
@@ -89,6 +89,13 @@ export default {
     },
   },
   computed: {
+    charactersSorted() {
+      return this.score.teams.map((team) => ( [
+        ...team.characters.filter((character) => character.crown),
+        ...team.characters.filter((character) => !character.crown && !character.available),
+        ...team.characters.filter((character) => character.available),
+      ]));
+    },
     isEnd() {
       return this.score.winner !== null;
     }
