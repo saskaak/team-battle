@@ -1,5 +1,8 @@
 <template>
-  <div class="App">
+  <div
+    class="App"
+    :class="`App--background-${background}`"
+  >
     <div class="container">
       <h1 class="App__logo">
         <span class="App__logo-top">Team Battle</span>
@@ -9,21 +12,21 @@
     <transition name="App__view-" mode="out-in">
       <ViewStart
         v-if="view === 'start'"
-        color-context="yellow"
+        :color-context="background"
         v-model:teams="teams"
         @start="startBattle"
         class="App__view"
       />
       <ViewGame
         v-else-if="view === 'game'"
-        color-context="yellow"
+        :color-context="background"
         :game="gameProp"
         @crown="endGame"
         class="App__view"
       />
       <ViewScore
         v-else-if="view === 'score'"
-        color-context="yellow"
+        :color-context="background"
         :score="scoreProp"
         class="App__view"
       />
@@ -70,6 +73,13 @@ export default {
         .filter(({character}) => character.available)
         .map(({index}) => index));
     },
+    winner() {
+      const winnerIndex = this.battle.findIndex((team) => team.every(({crown}) => crown));
+      return winnerIndex === -1 ? null : winnerIndex;
+    },
+    background() {
+      return this.winner === null ? 'yellow' : this.teams[this.winner].color;
+    },
     gameProp() {
       return {
         teams: this.game.map((indexCharacter, indexTeam) => {
@@ -88,13 +98,16 @@ export default {
       }
     },
     scoreProp() {
-      return this.teams.map((team, indexTeam) => ({
-        color: team.color,
-        characters: team.characters.map((name, indexCharacter) => ({
-          name,
-          ...this.battle[indexTeam][indexCharacter],
-        }))
-      }));
+      return {
+        winner: this.winner,
+        teams: this.teams.map((team, indexTeam) => ({
+          color: team.color,
+          characters: team.characters.map((name, indexCharacter) => ({
+            name,
+            ...this.battle[indexTeam][indexCharacter],
+          }))
+        })),
+      };
     },
   },
   methods: {
@@ -111,11 +124,20 @@ export default {
       this.view = 'game';
     },
     endGame(teamIndexWinner) {
-      this.battle.forEach((team, teamIndex) => this.battle[teamIndex][this.game[teamIndex]].available = false);
+      // Set both characters unavailable.
+      this.battle.forEach((team, teamIndex) => team[this.game[teamIndex]].available = false);
 
-      // TODO: Check if there are available characters for each team AND check if the game is over.
-
+      // Crown the winner.
       this.battle[teamIndexWinner][this.game[teamIndexWinner]].crown = true;
+
+      // If there's no available characters left, make the uncrowned characters available again.
+      this.battle.forEach((team, teamIndex) => {
+        const allUnavailable = team.every(({available}) => !available);
+        if (allUnavailable) {
+          this.battle[teamIndex] = team.map(({crown}) => ({crown, available: !crown}));
+        }
+      });
+
       this.view = 'score';
     },
   }
@@ -133,6 +155,18 @@ export default {
   @include breakpoint($ViewBase-breakpoint) {
     padding-bottom: $header-height;
   }
+
+  &--background-red {
+    background: $gradient-corner-red;
+  }
+
+  &--background-blue {
+    background: $gradient-corner-blue;
+  }
+
+  &--background-yellow {
+    background: $gradient-corner-yellow;
+  }
 }
 
 .App__logo {
@@ -146,6 +180,18 @@ export default {
   font-weight: bold;
   color: $color-white;
   text-shadow: 0 r(2) r(4) $color-yellow-dark;
+
+  .App--background-red & {
+    text-shadow: 0 r(4) r(12) $color-red-dark;
+  }
+
+  .App--background-blue & {
+    text-shadow: 0 r(4) r(12) $color-blue-dark;
+  }
+
+  .App--background-yellow & {
+    text-shadow: 0 r(4) r(12) $color-yellow-dark;
+  }
 }
 
 .App__logo-top {
