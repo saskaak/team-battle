@@ -2,15 +2,15 @@
   <div class="LineTextarea">
     <div class="LineTextarea__placeholder">
       <br
-        v-for="line in modelValue"
+        v-for="line in lines"
         :key="line"
       />
-      {{placeholder}}
+      {{ placeholder }}
     </div>
     <textarea
       v-bind="attrsTextarea"
-      :value="string"
-      :rows="Math.max(minRows, modelValue.length + 1)"
+      :value="modelValue"
+      :rows="Math.max(minRows, lines + 1)"
       class="LineTextarea__textarea"
       @input="onInput"
     />
@@ -25,7 +25,7 @@ export default {
       default: 1,
     },
     modelValue: {
-      type: Array,
+      type: String,
       required: true,
     },
     placeholder: {
@@ -34,43 +34,18 @@ export default {
     },
     attrsTextarea: {
       type: Object,
-      default: () => {},
+      default: () => {
+      },
     },
   },
   computed: {
-    stringRaw() {
-      return this.modelValue.join('\n');
+    lines() {
+      return this.modelValue ? this.modelValue.split('\n').length : 0;
     },
-    string() {
-      return this.stringRaw.length === 0
-        ? ''
-        : `${this.stringRaw}\n`;
-    }
   },
   methods: {
     async onInput(event) {
-      const el = event.target;
-      const {value} = el;
-      if (!value) {
-        this.$emit('update:modelValue', []);
-      }
-
-      // Remove all extra newlines
-      const valueFiltered = value
-        .replace(/^\n/g, '')
-        .replace(/\n\s*\n/g, '\n');
-      const array = valueFiltered
-        .split('\n')
-        .filter(line => line.trim());
-
-      this.$emit('update:modelValue', array);
-
-      // Correct the caret position after adding an extra newline in computed.string:
-      const caretPosition = el.selectionStart;
-      await this.$nextTick();
-      if (this.stringRaw === valueFiltered) {
-        el.setSelectionRange(caretPosition, caretPosition);
-      }
+      this.$emit('update:modelValue', event.target.value);
     },
   },
 };

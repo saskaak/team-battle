@@ -18,7 +18,9 @@
       <ViewStart
         v-if="view === 'start'"
         :color-context="background"
-        v-model:teams="teams"
+        :teamColors="teams.map(({color}) => color)"
+        :teamsValid="teamsValid"
+        v-model:teamStrings="teamStrings"
         @start="startBattle"
         class="App__view"
       />
@@ -44,9 +46,10 @@ import ViewStart from '@/components/ViewStart';
 import ViewGame from '@/components/ViewGame';
 import ViewScore from '@/components/ViewScore';
 
-const teamDefaults = {
-  characters: [],
-};
+const teamColors = [
+  'red',
+  'blue',
+];
 
 export default {
   components: {
@@ -57,21 +60,24 @@ export default {
   data() {
     return {
       view: 'start',
-      teams: [
-        {
-          ...teamDefaults,
-          color: 'red',
-        },
-        {
-          ...teamDefaults,
-          color: 'blue',
-        }
-      ],
+      teamStrings: ['', ''],
       battle: [],
       game: [],
     };
   },
   computed: {
+    teams() {
+      return this.teamStrings.map((teamString, index) => {
+        return {
+          characters: teamString.split('\n').filter(line => line.trim()),
+          color: teamColors[index],
+        }
+      });
+    },
+    teamsValid() {
+      const charactersByTeam = this.teams.map(({characters}) => characters);
+      return charactersByTeam.every(({length}) => length > 0) && charactersByTeam.some(({length}) => length > 1);
+    },
     availableCharacters() {
       return this.battle.map((team) => team
         .map((character, index) => ({character, index}))

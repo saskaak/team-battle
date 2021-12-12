@@ -8,13 +8,13 @@
     </template>
     <div class="team-grid">
       <div
-        v-for="team in emitterTeams"
-        :key="team.color"
+        v-for="(teamColor, index) in teamColors"
+        :key="teamColor"
         class="team-grid__column"
       >
         <TeamInput
-          v-model="team.characters"
-          :color="team.color"
+          v-model="emitterTeamStrings[index]"
+          :color="teamColor"
         />
       </div>
     </div>
@@ -47,17 +47,21 @@ export default {
       type: String,
       required: true,
     },
-    teams: {
+    teamColors: {
       type: Array,
+      required: true,
+    },
+    teamStrings: {
+      type: Array,
+      required: true,
+    },
+    teamsValid: {
+      type: Boolean,
       required: true,
     },
   },
   computed: {
-    emitterTeams: vModelEmitter('teams'),
-    teamsValid() {
-      const charactersByTeam = this.teams.map(({characters}) => characters);
-      return charactersByTeam.every(({length}) => length > 0) && charactersByTeam.some(({length}) => length > 1);
-    },
+    emitterTeamStrings: vModelEmitter('teamStrings'),
   },
 }
 </script>
