@@ -35,6 +35,8 @@
         v-else-if="view === 'score'"
         :color-context="background"
         :score="scoreProp"
+        @nextGame="startGame"
+        @endBattle="endBattle"
         class="App__view"
       />
     </transition>
@@ -150,6 +152,10 @@ export default {
       });
 
       this.view = 'score';
+    },
+    endBattle() {
+      this.battle = [];
+      this.view = 'start';
     },
   }
 }
