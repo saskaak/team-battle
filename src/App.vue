@@ -4,9 +4,14 @@
     :class="`App--background-${background}`"
   >
     <div class="container">
-      <h1 class="App__logo">
-        <span class="App__logo-top">Team Battle</span>
-        <span class="App__logo-bottom">Conductor</span>
+      <h1 class="App__header">
+        <a
+          href="/"
+          class="App__logo"
+        >
+          <span class="App__logo-top">Team Battle</span>
+          <span class="App__logo-bottom">Conductor</span>
+        </a>
       </h1>
     </div>
     <transition name="App__view-" mode="out-in">
@@ -169,15 +174,19 @@ export default {
   }
 }
 
-.App__logo {
+.App__header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: $header-height;
   padding-bottom: r(24);
-  text-transform: uppercase;
+}
+
+.App__logo {
   font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
   color: $color-white;
   text-shadow: 0 r(2) r(4) $color-yellow-dark;
 
