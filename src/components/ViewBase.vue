@@ -3,12 +3,12 @@
     :class="`ViewBase--color-context-${colorContext}`"
     class="ViewBase container"
   >
-    <div
-      v-if="$slots.header"
-      class="ViewBase__header"
-    >
-      <slot name="header"/>
-    </div>
+    <template v-if="$slots.header">
+      <div class="ViewBase__header">
+        <slot name="header"/>
+      </div>
+      <div class="ViewBase__header-spacer"></div>
+    </template>
     <div class="ViewBase__card">
       <div
         v-if="$slots['card-heading']"
@@ -54,7 +54,16 @@ export default {
 }
 
 .ViewBase__header {
-  margin-bottom: r(24);
+  margin-top: auto;
+  margin-bottom: auto;
+
+  @include breakpoint($ViewBase-breakpoint) {
+    margin: 0;
+  }
+}
+
+.ViewBase__header-spacer {
+  height: r(24);
 }
 
 .ViewBase__card {
