@@ -3,17 +3,7 @@
     class="App"
     :class="`App--background-${background}`"
   >
-    <div class="container">
-      <h1 class="App__header">
-        <a
-          href="/"
-          class="App__logo"
-        >
-          <span class="App__logo-top">Team Battle</span>
-          <span class="App__logo-bottom">Conductor</span>
-        </a>
-      </h1>
-    </div>
+    <AppHeader :colorContext="background"/>
     <transition name="App__view-" mode="out-in">
       <ViewStart
         v-if="view === 'start'"
@@ -44,6 +34,7 @@
 </template>
 
 <script>
+import AppHeader from '@/components/AppHeader';
 import ViewStart from '@/components/ViewStart';
 import ViewGame from '@/components/ViewGame';
 import ViewScore from '@/components/ViewScore';
@@ -55,6 +46,7 @@ const teamColors = [
 
 export default {
   components: {
+    AppHeader,
     ViewScore,
     ViewGame,
     ViewStart,
@@ -188,9 +180,8 @@ export default {
 
 .App__header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: $header-height;
   padding-bottom: r(24);
 }
