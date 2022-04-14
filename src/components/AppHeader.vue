@@ -6,10 +6,10 @@
     <h1>
       <a
         href="/"
-        class="App__logo"
+        class="AppHeader__logo"
       >
-        <span class="App__logo-top">Team Battle</span>
-        <span class="App__logo-bottom">Conductor</span>
+        <span class="AppHeader__logo-top">Team Battle</span>
+        <span class="AppHeader__logo-bottom">Conductor</span>
       </a>
 
     </h1>

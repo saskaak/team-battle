@@ -178,44 +178,6 @@ export default {
   }
 }
 
-.App__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: $header-height;
-  padding-bottom: r(24);
-}
-
-.App__logo {
-  font-weight: bold;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: $color-white;
-  text-shadow: 0 r(2) r(4) $color-yellow-dark;
-
-  .App--background-red & {
-    text-shadow: 0 r(4) r(12) $color-red-dark;
-  }
-
-  .App--background-blue & {
-    text-shadow: 0 r(4) r(12) $color-blue-dark;
-  }
-
-  .App--background-yellow & {
-    text-shadow: 0 r(4) r(12) $color-yellow-dark;
-  }
-}
-
-.App__logo-top {
-  display: block;
-  font-size: r(20);
-}
-
-.App__logo-bottom {
-  display: block;
-  font-size: r(22);
-}
-
 .App__view {
   transform-origin: bottom;
   transition-property: transform, opacity;
