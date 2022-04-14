@@ -6,7 +6,7 @@
     <AppHeader
       :showInfo="showInfo"
       :colorContext="background"
-      @toggleInfo="showInfo = !showInfo"
+      @setShowInfo="(value) => showInfo = value"
     />
     <transition name="App__view-" mode="out-in">
       <ViewStart

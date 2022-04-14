@@ -13,19 +13,22 @@
       </a>
 
     </h1>
-    <div class="AppHeader__info">
+    <div
+      class="AppHeader__info"
+      v-click-away="onClickAway"
+    >
       <button
-        v-if="!showInfo"
+        v-show="!showInfo"
         class="AppHeader__toggle AppHeader__toggle--close"
-        @click="$emit('toggleInfo')"
+        @click="$emit('setShowInfo', true)"
         aria-label="Open info"
       >
         <span aria-hidden="true">?</span>
       </button>
       <button
-        v-else
+        v-show="showInfo"
         class="AppHeader__toggle AppHeader__toggle--open"
-        @click="$emit('toggleInfo')"
+        @click="$emit('setShowInfo', false)"
         aria-label="Close info"
       >
         <span
@@ -48,12 +51,17 @@
 </template>
 
 <script>
+import {directive} from "vue3-click-away";
+
 import ArticleInfo from '@/components/ArticleInfo';
 
 export default {
+  directives: {
+    ClickAway: directive
+  },
   components: {ArticleInfo},
   emits: [
-    'toggleInfo',
+    'setShowInfo',
   ],
   props: {
     showInfo: {
@@ -65,6 +73,13 @@ export default {
       required: true,
     },
   },
+  setup(props, {emit}) {
+    return {
+      onClickAway() {
+        emit('setShowInfo', false);
+      },
+    }
+  }
 }
 </script>
 
