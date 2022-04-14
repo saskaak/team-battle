@@ -1,0 +1,21 @@
+@mixin clip-margins($overflow-hidden: false) {
+  $enough: r(10000);
+
+  @if ($overflow-hidden) {
+    overflow: hidden;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    margin-top: -$enough;
+    margin-bottom: $enough;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    margin-top: $enough;
+    margin-bottom: -$enough;
+  }
+}

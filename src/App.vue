@@ -3,7 +3,11 @@
     class="App"
     :class="`App--background-${background}`"
   >
-    <AppHeader :colorContext="background"/>
+    <AppHeader
+      :showInfo="showInfo"
+      :colorContext="background"
+      @toggleInfo="showInfo = !showInfo"
+    />
     <transition name="App__view-" mode="out-in">
       <ViewStart
         v-if="view === 'start'"
@@ -53,6 +57,7 @@ export default {
   },
   data() {
     return {
+      showInfo: false,
       view: 'start',
       teamStrings: ['', ''],
       battle: [],

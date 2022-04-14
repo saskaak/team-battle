@@ -1,0 +1,43 @@
+.text {
+  display: flex;
+}
+
+.text__inner {
+  @include clip-margins;
+  font-family: $ff-plain;
+  font-size: r(14);
+  flex-grow: 1;
+  line-height: 1.6;
+
+  p {
+    margin-bottom: r(16);
+    max-width: r(480);
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  b,
+  strong {
+    font-weight: 700;
+  }
+
+  h1 {
+    font-family: $ff-grandstander;
+    font-size: r(16);
+    font-weight: bold;
+    margin-bottom: r(12);
+
+    @include breakpoint(S) {
+      font-size: r(18);
+      font-weight: bold;
+      margin-bottom: r(12);
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
