@@ -4,7 +4,7 @@
     :color-context="colorContext"
   >
     <template v-slot:card-heading>
-      Enter two teams consisting of any number of characters.
+      Enter two teams consisting of at least two characters each.
     </template>
     <div class="team-grid">
       <div

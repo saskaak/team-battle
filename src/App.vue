@@ -85,7 +85,7 @@ export default {
     },
     teamsValid() {
       const charactersByTeam = this.teams.map(({characters}) => characters);
-      return charactersByTeam.every(({length}) => length > 0) && charactersByTeam.some(({length}) => length > 1);
+      return charactersByTeam.every(({length}) => length > 1);
     },
     availableCharacters() {
       return this.battle.map((team) => team
