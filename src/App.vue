@@ -1,19 +1,19 @@
 <template>
   <div
     class="App"
-    :class="[`App--background-${background}`, {
+    :class="[`App--background-${backgroundSlow}`, {
       'App--reverse': isReverse,
     }]"
   >
     <AppHeader
       :showInfo="showInfo"
-      :colorContext="background"
+      :colorContext="backgroundSlow"
       @setShowInfo="(value) => showInfo = value"
     />
     <transition name="App__view-" mode="out-in">
       <ViewStart
         v-if="view === 'start'"
-        :color-context="background"
+        :color-context="backgroundSlow"
         :teamColors="teams.map(({color}) => color)"
         :teamsValid="teamsValid"
         v-model:teamStrings="teamStrings"
@@ -22,7 +22,7 @@
       />
       <ViewGame
         v-else-if="view === 'game'"
-        :color-context="background"
+        :color-context="backgroundSlow"
         :game="gameProp"
         :is-backup="isBackup"
         @crown="endGame"
@@ -30,7 +30,7 @@
       />
       <ViewScore
         v-else-if="view === 'score'"
-        :color-context="background"
+        :color-context="backgroundSlow"
         :score="scoreProp"
         @undoGame="undoGame"
         @nextGame="startGame"
@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import {nextTick} from 'vue';
-
 import AppHeader from '@/components/AppHeader';
 import ViewStart from '@/components/ViewStart';
 import ViewGame from '@/components/ViewGame';
@@ -70,6 +68,7 @@ export default {
       battle: [],
       battleBackup: [],
       game: [],
+      backgroundSlow: 'yellow',
     };
   },
   computed: {
@@ -131,6 +130,11 @@ export default {
       };
     },
   },
+  watch: {
+    background(value) {
+      setTimeout(() => this.backgroundSlow = value, 200)
+    },
+  },
   methods: {
     startBattle() {
       this.battle = this.teams.map((team) => team.characters.map(() => ({
@@ -164,18 +168,11 @@ export default {
       // If we were looking at a backup, we no longer are.
       this.isBackup = false;
 
-      // This forces the current view to render one last time with the new color context for the transition.
-      await nextTick();
-
       this.view = 'score';
     },
     async undoGame() {
       this.battle = this.battleBackup;
       this.isBackup = true;
-
-      // This forces the current view to render one last time with the new color context for the transition.
-      await nextTick();
-
       this.view = 'game';
     },
     endBattle() {
