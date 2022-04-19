@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import {nextTick} from 'vue';
+
 import AppHeader from '@/components/AppHeader';
 import ViewStart from '@/components/ViewStart';
 import ViewGame from '@/components/ViewGame';
@@ -142,7 +144,7 @@ export default {
         .map((characters) => characters[Math.floor(Math.random() * characters.length)]);
       this.view = 'game';
     },
-    endGame(teamIndexWinner) {
+    async endGame(teamIndexWinner) {
       this.battleBackup = JSON.parse(JSON.stringify(this.battle));
 
       // Set both characters unavailable.
@@ -162,11 +164,18 @@ export default {
       // If we were looking at a backup, we no longer are.
       this.isBackup = false;
 
+      // This forces the current view to render one last time with the new color context for the transition.
+      await nextTick();
+
       this.view = 'score';
     },
-    undoGame() {
+    async undoGame() {
       this.battle = this.battleBackup;
       this.isBackup = true;
+
+      // This forces the current view to render one last time with the new color context for the transition.
+      await nextTick();
+
       this.view = 'game';
     },
     endBattle() {
