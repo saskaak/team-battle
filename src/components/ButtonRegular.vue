@@ -1,8 +1,22 @@
 <template>
-  <button class="ButtonRegular">
+  <button
+    class="ButtonRegular"
+    :class="{'ButtonRegular--round': round}"
+  >
     <slot/>
   </button>
 </template>
+
+<script>
+export default {
+  props: {
+    round: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 @import "~@/styles/definitions";
@@ -30,6 +44,11 @@
     opacity: 0.5;
     box-shadow: none;
     cursor: default;
+  }
+
+  &--round {
+    min-width: r(48);
+    min-height: r(48);
   }
 }
 

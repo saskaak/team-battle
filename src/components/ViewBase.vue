@@ -108,6 +108,7 @@ export default {
 
 .ViewBase__footer {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   margin-top: r(32);
 

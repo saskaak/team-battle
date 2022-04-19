@@ -50,6 +50,14 @@
 
     <template v-slot:footer>
       <ButtonRegular
+        @click="$emit('undoGame')"
+        round
+        class="ViewScore__undo"
+      >
+        <div class="ViewScore__undo-icon">&lt;</div>
+      </ButtonRegular>
+
+      <ButtonRegular
         v-if="isEnd"
         @click="$emit('endBattle')"
       >
@@ -185,6 +193,15 @@ export default {
   width: r(20);
   height: r(20);
   margin-right: r(8);
+}
+
+.ViewScore__undo {
+  margin-right: r(16);
+}
+
+.ViewScore__undo-icon {
+  font-size: r(32);
+  padding-top: r(4);
 }
 
 </style>
