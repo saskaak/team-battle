@@ -10,7 +10,7 @@
       >
         <div class="ViewScore__header-crown">
           <div class="ViewScore__header-crown-sizer">
-          <IconCrown class="ViewScore__header-crown-icon"/>
+            <IconCrown class="ViewScore__header-crown-icon"/>
           </div>
         </div>
         <div class="ViewScore__header-text">
@@ -90,7 +90,7 @@ export default {
   },
   computed: {
     charactersSorted() {
-      return this.score.teams.map((team) => ( [
+      return this.score.teams.map((team) => ([
         ...team.characters.filter((character) => character.crown),
         ...team.characters.filter((character) => !character.crown && !character.available),
         ...team.characters.filter((character) => character.available),
