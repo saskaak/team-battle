@@ -1,7 +1,9 @@
 <template>
   <div
     class="App"
-    :class="`App--background-${background}`"
+    :class="[`App--background-${background}`, {
+      'App--reverse': isReverse,
+    }]"
   >
     <AppHeader
       :showInfo="showInfo"
@@ -22,6 +24,7 @@
         v-else-if="view === 'game'"
         :color-context="background"
         :game="gameProp"
+        :is-backup="isBackup"
         @crown="endGame"
         class="App__view"
       />
@@ -29,6 +32,7 @@
         v-else-if="view === 'score'"
         :color-context="background"
         :score="scoreProp"
+        @undoGame="undoGame"
         @nextGame="startGame"
         @endBattle="endBattle"
         class="App__view"
@@ -59,12 +63,17 @@ export default {
     return {
       showInfo: false,
       view: 'start',
+      isBackup: false,
       teamStrings: ['', ''],
       battle: [],
+      battleBackup: [],
       game: [],
     };
   },
   computed: {
+    isReverse() {
+      return this.isBackup;
+    },
     teams() {
       return this.teamStrings.map((teamString, index) => {
         return {
@@ -134,6 +143,8 @@ export default {
       this.view = 'game';
     },
     endGame(teamIndexWinner) {
+      this.battleBackup = JSON.parse(JSON.stringify(this.battle));
+
       // Set both characters unavailable.
       this.battle.forEach((team, teamIndex) => team[this.game[teamIndex]].available = false);
 
@@ -148,7 +159,15 @@ export default {
         }
       });
 
+      // If we were looking at a backup, we no longer are.
+      this.isBackup = false;
+
       this.view = 'score';
+    },
+    undoGame() {
+      this.battle = this.battleBackup;
+      this.isBackup = true;
+      this.view = 'game';
     },
     endBattle() {
       this.battle = [];
@@ -195,6 +214,10 @@ export default {
   &--enter-from {
     transform: scale(0.9) translateX(r(128));
     opacity: 0;
+
+    .App--reverse & {
+      transform: scale(0.9) translateX(r(-128));
+    }
   }
 
   &--enter-active {
@@ -204,6 +227,10 @@ export default {
   &--leave-to {
     transform: scale(0.9) translateX(r(-128));
     opacity: 0;
+
+    .App--reverse & {
+      transform: scale(0.9) translateX(r(128));
+    }
   }
 
   &--leave-active {

@@ -40,6 +40,7 @@
         class="team-grid__column"
       >
         <TeamRoulette
+          :active="!isBackup"
           :character="team.character"
           :other-characters="team.otherCharacters"
           :color="team.color"
@@ -77,10 +78,18 @@ export default {
       type: Object,
       required: true,
     },
+    isBackup: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
-      spinning: this.game.teams.some(({otherCharacters}) => otherCharacters.length > 0),
+      spinning: (
+        this.game.teams.some(({otherCharacters}) => otherCharacters.length > 0)
+        &&
+        !this.isBackup
+      ),
     };
   },
 }

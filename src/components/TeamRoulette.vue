@@ -32,6 +32,10 @@ export default {
     TeamBox,
   },
   props: {
+    active: {
+      type: Boolean,
+      default: true,
+    },
     color: {
       type: String,
       required: true,
@@ -47,7 +51,7 @@ export default {
   },
   data() {
     return {
-      spinning: this.otherCharacters.length > 0,
+      spinning: this.active && this.otherCharacters.length > 0,
     };
   },
   computed: {
