@@ -103,7 +103,7 @@ export default {
           };
         }),
         number: 1 + this.battle
-          .map((team) => team.filter(({available}) => !available).length)
+          .map((team) => team.filter(({crown}) => crown).length)
           .reduce((sum, accumulator) => sum + accumulator, 0),
       }
     },
